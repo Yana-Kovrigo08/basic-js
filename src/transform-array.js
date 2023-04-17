@@ -36,6 +36,16 @@ function transform(arr) {
 
   return arrayNew
   
+
+        // '--discard-next'  исключает следующий
+        // '--discard-prev'  исключает предшествующий
+        // '--double-next'   дублирует следующий
+        // '--double-prev'   дублирует предшествующий
+}
+//transform([1, 2, 3, '--double-next', 4, 5])   //  => [1, 2, 3, 4, 4, 5]
+// transform([1, 2, 3, "--discard-next", 4, 5])   //  => 
+// transform([ 1, 2, 3, '--double-prev', 4, 5 ])   //  => 
+
 module.exports = {
   transform
 };
