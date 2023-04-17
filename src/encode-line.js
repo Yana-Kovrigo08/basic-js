@@ -10,8 +10,26 @@ const { NotImplementedError } = require('../extensions/index.js');
  * For aabbbc should return 2a3bc
  *
  */
-function encodeLine(s) {
-  return s.replace(/([a-z])\1*/g, (it)=>(it.length>1?it.length + it[0]: it[0]))
+function encodeLine(str) {
+  let res = ''
+  let val = 1;
+  let arrStr = str.split('');
+  arrStr.forEach((e, i) => {
+    if (e == arrStr[i+1]) {
+      val++
+    } else {
+      if (val > 1) {
+        res += val+e;
+        val = 1
+      }else{
+        res += e
+        val = 1
+      }
+    }
+  })
+
+  return res
+
 }
 
 
