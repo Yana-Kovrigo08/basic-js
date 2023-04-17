@@ -1,4 +1,4 @@
-const { NotImplementedError } = require("../extensions/index.js");
+const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * In the popular Minesweeper game you have a board with some mines and those cells
@@ -24,39 +24,55 @@ const { NotImplementedError } = require("../extensions/index.js");
  * ]
  */
 function minesweeper(matrix) {
-  var adjacents = ([i, j]) => [
-    [i - 1, j - 1],
-    [i - 1, j],
-    [i - 1, j + 1],
-    [i, j - 1],
-    [i, j + 1],
-    [i + 1, j - 1],
-    [i + 1, j],
-    [i + 1, j + 1],
-  ];
-  var hintsMatrix = matrix.map((r) => r.map((_) => 0));
+  let res = [];
+  //let newArr = [...matrix].flat();
+  // console.log(newArr);
+  // newArr.forEach((e,i) => {
+  //   let r = 0;
+  //   if (newArr[i-matrix[0].length - 1] == true){r++}
+  //   if (newArr[i-matrix[0].length] == true){r++}
+  //   if (newArr[i-matrix[0].length + 1] == true){r++}
 
-  for (var i = 0; i < matrix.length; i++) {
-    for (var j = 0; j < matrix[i].length; j++) {
-      if (matrix[i][j]) {
-        var myAd = adjacents([i, j]);
-        for (var k = 0; k < 8; k++) {
-          if (
-            myAd[k][0] >= 0 &&
-            myAd[k][1] >= 0 &&
-            myAd[k][0] < matrix.length &&
-            myAd[k][1] < matrix[i].length
-          ) {
-            hintsMatrix[myAd[k][0]][myAd[k][1]]++;
-          }
-        }
+  //   if (newArr[i-1] == true){r++}
+  //   if (newArr[i+1] == true){r++}
+
+  //   if (newArr[i+matrix[0].length - 1] == true){r++}
+  //   if (newArr[i+matrix[0].length] == true){r++}
+  //   if (newArr[i+matrix[0].length + 1] == true){r++}
+
+  //   res.push(r)
+  // })
+  for(let i = 0; i < matrix.length; i++) {
+    res[i] = [];
+
+    for(let j = 0; j < matrix[0].length; j++) {
+      let num = 0;
+      if (matrix[i - 1]) {
+        if(matrix[i - 1][j]) num++;
+        if(matrix[i - 1][j + 1]) num++;
+        if(matrix[i - 1][j - 1]) num++;
       }
+      if(matrix[i][j - 1]) num++;
+      if(matrix[i][j + 1]) num++;
+      if (matrix[i + 1]) {
+        if(matrix[i + 1][j]) num++;
+        if(matrix[i + 1][j + 1]) num++;
+        if(matrix[i + 1][j - 1]) num++;
+      }
+      res[i][j] = num;
     }
   }
-
-  return hintsMatrix;
+  console.log(res);
+  return res;
 }
 
+// const matrix = [
+//   [true, false, false],
+//   [false, true, false],
+//   [false, false, false]
+// ];
+// minesweeper(matrix)   // => [ [1, 2, 1], [2, 1, 1], [1, 1, 1] ];
+
 module.exports = {
-  minesweeper,
+  minesweeper
 };
